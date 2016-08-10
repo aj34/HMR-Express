@@ -1,16 +1,24 @@
 body {
   padding-top: 50px;
   padding-left: 50px;
+  font: 12px Arial;
 }
+
 #content {
-  width: 600px;
-  height: 400px;
-  background-color: #EFE;
+  width: 1000px;
+  height: 800px;
+  background-color: rgb(235, 235, 235);
 }
-.bubble {
-  display: inline-block;
-  fill: tomato;
-  fill-opacity: 0.5;
-  stroke: black;
-  stroke-weight: 1px;
+
+path {
+  stroke-width: 2;
+  fill: none;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: grey;
+  stroke-width: 1;
+  shape-rendering: crispEdges;
 }
