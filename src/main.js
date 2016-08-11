@@ -83,3 +83,147 @@ if (module.hot) {
     }
   });
 }
+
+
+
+
+
+
+window.data1 = [{
+  "crimeType": "mip",
+  "totalCrimes": 24
+}, {
+  "crimeType": "theft",
+  "totalCrimes": 558
+}, {
+  "crimeType": "drugs",
+  "totalCrimes": 81
+}, {
+  "crimeType": "arson",
+  "totalCrimes": 3
+}, {
+  "crimeType": "assault",
+  "totalCrimes": 80
+}, {
+  "crimeType": "burglary",
+  "totalCrimes": 49
+}, {
+  "crimeType": "disorderlyConduct",
+  "totalCrimes": 63
+}, {
+  "crimeType": "mischief",
+  "totalCrimes": 189
+}, {
+  "crimeType": "dui",
+  "totalCrimes": 107
+}, {
+  "crimeType": "resistingArrest",
+  "totalCrimes": 11
+}, {
+  "crimeType": "sexCrimes",
+  "totalCrimes": 24
+}, {
+  "crimeType": "other",
+  "totalCrimes": 58
+}];
+
+
+window.data2 = [{
+  "crimeType": "mip",
+  "totalCrimes": 10
+}, {
+  "crimeType": "theft",
+  "totalCrimes": 30
+}, {
+  "crimeType": "drugs",
+  "totalCrimes": 10
+}, {
+  "crimeType": "arson",
+  "totalCrimes": 3
+}, {
+  "crimeType": "assault",
+  "totalCrimes": 80
+}, {
+  "crimeType": "burglary",
+  "totalCrimes": 49
+}, {
+  "crimeType": "disorderlyConduct",
+  "totalCrimes": 10
+}, {
+  "crimeType": "mischief",
+  "totalCrimes": 389
+}, {
+  "crimeType": "dui",
+  "totalCrimes": 507
+}, {
+  "crimeType": "resistingArrest",
+  "totalCrimes": 11
+}, {
+  "crimeType": "sexCrimes",
+  "totalCrimes": 24
+}, {
+  "crimeType": "other",
+  "totalCrimes": 258
+}];
+
+
+var width1 = 800,
+  height1 = 250,
+  radius1 = Math.min(width1, height1) / 2;
+
+var color = d3.scale.ordinal()
+  .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+
+var arc = d3.svg.arc()
+  .outerRadius(radius1 - 10)
+  .innerRadius(0);
+
+var pie = d3.layout.pie()
+  .sort(null)
+  .value(function(d) {
+    return d.totalCrimes;
+  });
+
+
+var svg = d3.select("#chartDiv").append("svg")
+  .attr("width", width1)
+  .attr("height", height1)
+  .append("g")
+  .attr("id", "pieChart")
+  .attr("transform", "translate(" + width1 / 2 + "," + height1 / 2 + ")");
+
+var path = svg.selectAll("path")
+  .data(pie(data1))
+  .enter()
+  .append("path");
+
+path.transition()
+  .duration(500)
+  .attr("fill", function(d, i) {
+    return color(d.data.crimeType);
+  })
+  .attr("d", arc)
+  .each(function(d) {
+    this._current = d;
+  }); // store the initial angles
+
+
+window.change = function change(data) {
+  path.data(pie(data));
+  path.transition().duration(750).attrTween("d", arcTween); // redraw the arcs
+}
+
+// Store the displayed angles in _current.
+// Then, interpolate from _current to the new angles.
+// During the transition, _current is updated in-place by d3.interpolate.
+
+function arcTween(a) {
+  var i = d3.interpolate(this._current, a);
+  this._current = i(0);
+  return function(t) {
+    return arc(i(t));
+  };
+}
+
+
+

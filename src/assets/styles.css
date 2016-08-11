@@ -26,3 +26,13 @@ body {
 .slice path {
   stroke: #fff;
 }
+
+
+text {
+  font: 10px sans-serif;
+}
+form {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
