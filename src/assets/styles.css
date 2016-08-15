@@ -2,15 +2,18 @@ body {
   padding-top: 50px;
   padding-left: 50px;
 }
-#content {
-  width: 600px;
-  height: 400px;
-  background-color: #EFE;
+
+.axis {
+  font: 10px sans-serif;
 }
-.bubble {
-  display: inline-block;
-  fill: tomato;
-  fill-opacity: 0.5;
-  stroke: black;
-  stroke-weight: 1px;
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.bar {
+  fill: steelBlue;
 }
