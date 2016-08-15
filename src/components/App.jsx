@@ -12,25 +12,19 @@ const dataset = _.map(_.range(25), function (i) {
     radius: Math.random() * 20
   };
 }); // using underscore for random data for now
-import React, { PropTypes } from 'react'
+import { PropTypes } from 'react'
 
 const App = React.createClass({
-  initCode : () => {
+  initCode() {
+    console.log(this)
     this.visual = d3.select(ReactDOM.findDOMNode(this)).insert("svg:svg").append("svg:g")
+  },
 
-  }
-
-  componentDidMount = () => {
-    debugger
+  componentDidMount() {
     this.initCode();
-  }
+  },
 
-  renderCode = () => {
-
-    // return <div>{coded}</div>
-  }
-
-  render = () => {
+  render: () => {
     return(
       <div/>
     )
